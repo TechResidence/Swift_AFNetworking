@@ -11,7 +11,7 @@ import AFNetworking
 import AFNetworkActivityLogger
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,11 +19,14 @@ class ViewController: UIViewController {
         AFNetworkActivityLogger.sharedLogger().startLogging()
         AFNetworkActivityLogger.sharedLogger().level = .AFLoggerLevelDebug
         
-        
+        /** manager */
         let manager:AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
         let serializer:AFJSONRequestSerializer = AFJSONRequestSerializer()
         let param = ["format":"json"]
         manager.requestSerializer = serializer
+        
+        
+        
         
         let jsonUrl:String! = "http://www.raywenderlich.com/demos/weather_sample/weather.php"
         
@@ -66,20 +69,18 @@ class ViewController: UIViewController {
                 let imageData = NSData(data: UIImageJPEGRepresentation(value, 1)!)
                 data.appendPartWithFileData(imageData, name: name, fileName: name, mimeType: "image/jpeg")
             }
+            
             }, success: { (operation: AFHTTPRequestOperation!, responsobject: AnyObject!) in
                 print("response: \(responsobject)")
             }, failure: { (operation, error) in
                 print("Error: \(error)")
         })
-        
-
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-
+    
+    
 }
 
